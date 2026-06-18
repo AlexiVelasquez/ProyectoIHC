@@ -1,0 +1,148 @@
+<div class="page">
+
+  <!-- Header -->
+  <header class="page-header">
+    <button class="back-btn" (click)="ir('/')" aria-label="Volver">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <div class="header-info">
+      <h1>Historial de Visitas</h1>
+      <span>Colegio Buenaventura</span>
+    </div>
+    <div class="header-actions">
+      <button class="header-btn" (click)="ir('/buscar')">
+        <i class="fas fa-search"></i> Buscar
+      </button>
+      <button class="header-btn primary" (click)="ir('/registro')">
+        <i class="fas fa-plus"></i> Nueva visita
+      </button>
+    </div>
+  </header>
+
+  <!-- Stats Row -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-icon blue"><i class="fas fa-users"></i></div>
+      <div class="stat-data">
+        <span class="stat-num">{{ visitas.length }}</span>
+        <span class="stat-label">Total registros</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon green"><i class="fas fa-calendar-day"></i></div>
+      <div class="stat-data">
+        <span class="stat-num">{{ totalHoy }}</span>
+        <span class="stat-label">Visitas hoy</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon amber"><i class="fas fa-filter"></i></div>
+      <div class="stat-data">
+        <span class="stat-num">{{ filtradas.length }}</span>
+        <span class="stat-label">Resultados filtro</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Table Container -->
+  <div class="table-container">
+
+    <!-- Toolbar -->
+    <div class="table-toolbar">
+      <div class="search-wrap">
+        <i class="fas fa-search search-icon"></i>
+        <input
+          type="text"
+          [(ngModel)]="searchTerm"
+          (input)="filtrar()"
+          placeholder="Buscar por nombre, DNI, apellido o motivo..."
+          class="search-input">
+        <button class="clear-btn" *ngIf="searchTerm" (click)="searchTerm=''; filtrar()">
+          <i class="fas fa-xmark"></i>
+        </button>
+      </div>
+      <div class="toolbar-right">
+        <span class="results-count">{{ filtradas.length }} resultado(s)</span>
+      </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th class="th-num">#</th>
+            <th (click)="ordenar('nombre')" class="sortable">
+              <span>Nombres</span>
+              <i class="fas" [class.fa-sort]="sortColumn !== 'nombre'"
+                 [class.fa-sort-up]="sortColumn === 'nombre' && sortAsc"
+                 [class.fa-sort-down]="sortColumn === 'nombre' && !sortAsc"></i>
+            </th>
+            <th (click)="ordenar('apellidos')" class="sortable">
+              <span>Apellidos</span>
+              <i class="fas" [class.fa-sort]="sortColumn !== 'apellidos'"
+                 [class.fa-sort-up]="sortColumn === 'apellidos' && sortAsc"
+                 [class.fa-sort-down]="sortColumn === 'apellidos' && !sortAsc"></i>
+            </th>
+            <th (click)="ordenar('dni')" class="sortable">
+              <span>DNI</span>
+              <i class="fas" [class.fa-sort]="sortColumn !== 'dni'"
+                 [class.fa-sort-up]="sortColumn === 'dni' && sortAsc"
+                 [class.fa-sort-down]="sortColumn === 'dni' && !sortAsc"></i>
+            </th>
+            <th (click)="ordenar('motivoVisita')" class="sortable">
+              <span>Motivo de Visita</span>
+              <i class="fas" [class.fa-sort]="sortColumn !== 'motivoVisita'"
+                 [class.fa-sort-up]="sortColumn === 'motivoVisita' && sortAsc"
+                 [class.fa-sort-down]="sortColumn === 'motivoVisita' && !sortAsc"></i>
+            </th>
+            <th (click)="ordenar('fecha')" class="sortable">
+              <span>Fecha</span>
+              <i class="fas" [class.fa-sort]="sortColumn !== 'fecha'"
+                 [class.fa-sort-up]="sortColumn === 'fecha' && sortAsc"
+                 [class.fa-sort-down]="sortColumn === 'fecha' && !sortAsc"></i>
+            </th>
+            <th>Hora</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let v of filtradas; let i = index" class="table-row">
+            <td class="td-num mono">{{ i + 1 }}</td>
+            <td>
+              <div class="cell-with-avatar">
+                <span class="mini-avatar">{{ v.nombre.charAt(0) }}</span>
+                {{ v.nombre }}
+              </div>
+            </td>
+            <td>{{ v.apellidos }}</td>
+            <td><code class="dni-badge mono">{{ v.dni }}</code></td>
+            <td>
+              <span class="motivo-chip">{{ v.motivoVisita }}</span>
+            </td>
+            <td>
+              <span class="date-cell">
+                <i class="fas fa-calendar-alt"></i> {{ v.fecha }}
+              </span>
+            </td>
+            <td>
+              <span class="time-cell mono">
+                <i class="fas fa-clock"></i> {{ v.hora }}
+              </span>
+            </td>
+          </tr>
+
+          <!-- Empty state -->
+          <tr *ngIf="filtradas.length === 0">
+            <td colspan="7" class="empty-state">
+              <div class="empty-inner">
+                <i class="fas fa-inbox"></i>
+                <p>No se encontraron registros</p>
+                <span *ngIf="searchTerm">Intente con otro término de búsqueda</span>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

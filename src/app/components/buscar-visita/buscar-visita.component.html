@@ -1,0 +1,151 @@
+<div class="page">
+
+  <!-- Header -->
+  <header class="page-header">
+    <button class="back-btn" (click)="ir('/')" aria-label="Volver">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <div class="header-info">
+      <h1>Buscar Visita</h1>
+      <span>Colegio Buenaventura</span>
+    </div>
+    <button class="header-btn" (click)="ir('/historial')">
+      <i class="fas fa-table-list"></i> Ver historial
+    </button>
+  </header>
+
+  <!-- Body -->
+  <div class="page-body">
+
+    <div class="search-panel">
+
+      <!-- Filtros -->
+      <div class="filters-card">
+        <div class="card-header">
+          <div class="card-header-icon">
+            <i class="fas fa-filter"></i>
+          </div>
+          <div>
+            <h2>Criterios de Búsqueda</h2>
+            <p>Complete al menos un campo para buscar</p>
+          </div>
+        </div>
+
+        <div class="filters-grid">
+
+          <div class="filter-field">
+            <label for="dni">
+              <i class="fas fa-id-card"></i> DNI
+            </label>
+            <div class="input-wrap">
+              <input
+                id="dni"
+                type="text"
+                [(ngModel)]="filtros.dni"
+                (keydown.enter)="buscar()"
+                placeholder="12345678"
+                maxlength="8">
+            </div>
+          </div>
+
+          <div class="filter-field">
+            <label for="nombre">
+              <i class="fas fa-user"></i> Nombre
+            </label>
+            <div class="input-wrap">
+              <input
+                id="nombre"
+                type="text"
+                [(ngModel)]="filtros.nombre"
+                (keydown.enter)="buscar()"
+                placeholder="Ej: Juan">
+            </div>
+          </div>
+
+          <div class="filter-field">
+            <label for="apellido">
+              <i class="fas fa-user-tag"></i> Apellido
+            </label>
+            <div class="input-wrap">
+              <input
+                id="apellido"
+                type="text"
+                [(ngModel)]="filtros.apellido"
+                (keydown.enter)="buscar()"
+                placeholder="Ej: García">
+            </div>
+          </div>
+
+        </div>
+
+        <div class="filter-actions">
+          <button class="btn btn-clear" (click)="limpiar()" [disabled]="!hayFiltros && !buscado">
+            <i class="fas fa-eraser"></i> Limpiar
+          </button>
+          <button class="btn btn-search" (click)="buscar()" [disabled]="!hayFiltros || loading">
+            <ng-container *ngIf="!loading">
+              <i class="fas fa-magnifying-glass"></i> Buscar
+            </ng-container>
+            <ng-container *ngIf="loading">
+              <i class="fas fa-spinner fa-spin"></i> Buscando...
+            </ng-container>
+          </button>
+        </div>
+      </div>
+
+      <!-- Resultados -->
+      <div class="results-card" *ngIf="buscado">
+
+        <div class="results-header">
+          <h3>
+            <i class="fas fa-list-ul"></i>
+            Resultados
+          </h3>
+          <span class="results-badge" [class.zero]="resultados.length === 0">
+            {{ resultados.length }} encontrado(s)
+          </span>
+        </div>
+
+        <!-- Lista de resultados -->
+        <div class="results-list" *ngIf="resultados.length > 0">
+          <div class="result-item" *ngFor="let v of resultados; let i = index">
+            <div class="result-avatar">{{ v.nombre.charAt(0) }}</div>
+            <div class="result-data">
+              <div class="result-name">{{ v.nombre }} {{ v.apellidos }}</div>
+              <div class="result-meta">
+                <span class="meta-chip dni"><i class="fas fa-id-card"></i> {{ v.dni }}</span>
+                <span class="meta-chip motivo"><i class="fas fa-tag"></i> {{ v.motivoVisita }}</span>
+                <span class="meta-chip fecha"><i class="fas fa-calendar"></i> {{ v.fecha }} · {{ v.hora }}</span>
+              </div>
+              <div class="result-desc" *ngIf="v.descripcion">
+                <i class="fas fa-align-left"></i>
+                <span>{{ v.descripcion }}</span>
+              </div>
+            </div>
+            <div class="result-index mono">{{ i + 1 }}</div>
+          </div>
+        </div>
+
+        <!-- Sin resultados -->
+        <div class="no-results" *ngIf="resultados.length === 0">
+          <div class="no-results-icon">
+            <i class="fas fa-search"></i>
+          </div>
+          <p>No se encontraron visitas con los criterios indicados</p>
+          <span>Intente con otros datos</span>
+        </div>
+
+      </div>
+
+      <!-- Estado inicial -->
+      <div class="initial-state" *ngIf="!buscado && !loading">
+        <div class="initial-icon">
+          <i class="fas fa-magnifying-glass-plus"></i>
+        </div>
+        <p>Ingrese los criterios de búsqueda</p>
+        <span>Puede buscar por DNI, nombre o apellido</span>
+      </div>
+
+    </div>
+  </div>
+</div>

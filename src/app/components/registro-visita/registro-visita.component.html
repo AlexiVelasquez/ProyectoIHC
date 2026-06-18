@@ -1,0 +1,177 @@
+<!-- ══ SUCCESS OVERLAY ════════════════════════════════════════════ -->
+<div class="success-overlay" *ngIf="success">
+  <div class="success-modal">
+    <div class="success-check">
+      <i class="fas fa-check"></i>
+    </div>
+    <h2>¡Visita registrada!</h2>
+    <p>El visitante ha sido registrado exitosamente.</p>
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
+    <span class="redirect-hint">Redirigiendo al inicio...</span>
+  </div>
+</div>
+
+<!-- ══ PAGE ══════════════════════════════════════════════════════ -->
+<div class="page">
+
+  <!-- Header -->
+  <header class="page-header">
+    <button class="back-btn" (click)="volver()" aria-label="Volver">
+      <i class="fas fa-arrow-left"></i>
+    </button>
+    <div class="header-info">
+      <h1>Registro de Visitas</h1>
+      <span>Colegio Buenaventura</span>
+    </div>
+    <div class="header-badge">
+      <i class="fas fa-clipboard-list"></i>
+    </div>
+  </header>
+
+  <!-- Body -->
+  <div class="page-body">
+    <div class="card">
+
+      <!-- Sidebar -->
+      <aside class="card-sidebar">
+        <div class="visitor-avatar">
+          <i class="fas fa-user"></i>
+          <div class="avatar-pulse"></div>
+        </div>
+        <p class="sidebar-label">Nuevo Visitante</p>
+        <div class="sidebar-info">
+          <i class="fas fa-info-circle"></i>
+          <span>Complete todos los campos marcados como obligatorios</span>
+        </div>
+        <div class="sidebar-steps">
+          <div class="step active"><span>1</span> Datos personales</div>
+          <div class="step active"><span>2</span> Motivo de visita</div>
+          <div class="step active"><span>3</span> Descripción</div>
+        </div>
+      </aside>
+
+      <!-- Form -->
+      <div class="card-form">
+        <div class="form-heading">
+          <h2><i class="fas fa-pen-to-square"></i> Formulario de Registro</h2>
+        </div>
+
+        <!-- Error global -->
+        <div class="alert-error" *ngIf="errorMsg">
+          <i class="fas fa-circle-exclamation"></i> {{ errorMsg }}
+        </div>
+
+        <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+          <!-- Row 1: Nombre + Apellidos -->
+          <div class="form-row">
+            <div class="form-field" [class.has-error]="isError('nombre')" [class.is-valid]="isValid('nombre')">
+              <label for="nombre">
+                <i class="fas fa-user"></i> Nombre(s)
+                <span class="req">*</span>
+              </label>
+              <div class="input-wrap">
+                <input id="nombre" type="text" formControlName="nombre"
+                       placeholder="Ej: Juan Carlos" autocomplete="off">
+                <i class="fas fa-check status-icon valid-icon"></i>
+                <i class="fas fa-xmark status-icon error-icon"></i>
+              </div>
+              <div class="field-error" *ngIf="isError('nombre')">
+                <span *ngIf="f['nombre'].errors?.['required']">Campo requerido</span>
+                <span *ngIf="f['nombre'].errors?.['minlength']">Mínimo 2 caracteres</span>
+                <span *ngIf="f['nombre'].errors?.['pattern']">Solo se permiten letras</span>
+              </div>
+            </div>
+
+            <div class="form-field" [class.has-error]="isError('apellidos')" [class.is-valid]="isValid('apellidos')">
+              <label for="apellidos">
+                <i class="fas fa-user-tag"></i> Apellidos
+                <span class="req">*</span>
+              </label>
+              <div class="input-wrap">
+                <input id="apellidos" type="text" formControlName="apellidos"
+                       placeholder="Ej: García López" autocomplete="off">
+                <i class="fas fa-check status-icon valid-icon"></i>
+                <i class="fas fa-xmark status-icon error-icon"></i>
+              </div>
+              <div class="field-error" *ngIf="isError('apellidos')">
+                <span *ngIf="f['apellidos'].errors?.['required']">Campo requerido</span>
+                <span *ngIf="f['apellidos'].errors?.['minlength']">Mínimo 2 caracteres</span>
+                <span *ngIf="f['apellidos'].errors?.['pattern']">Solo se permiten letras</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 2: DNI + Motivo -->
+          <div class="form-row">
+            <div class="form-field" [class.has-error]="isError('dni')" [class.is-valid]="isValid('dni')">
+              <label for="dni">
+                <i class="fas fa-id-card"></i> DNI
+                <span class="req">*</span>
+              </label>
+              <div class="input-wrap">
+                <input id="dni" type="text" formControlName="dni"
+                       placeholder="12345678" maxlength="8" autocomplete="off">
+                <i class="fas fa-check status-icon valid-icon"></i>
+                <i class="fas fa-xmark status-icon error-icon"></i>
+              </div>
+              <div class="field-error" *ngIf="isError('dni')">
+                <span *ngIf="f['dni'].errors?.['required']">Campo requerido</span>
+                <span *ngIf="f['dni'].errors?.['pattern']">Debe tener exactamente 8 dígitos</span>
+              </div>
+            </div>
+
+            <div class="form-field" [class.has-error]="isError('motivoVisita')" [class.is-valid]="isValid('motivoVisita')">
+              <label for="motivo">
+                <i class="fas fa-clipboard-question"></i> Motivo de Visita
+                <span class="req">*</span>
+              </label>
+              <div class="input-wrap select-wrap">
+                <select id="motivo" formControlName="motivoVisita">
+                  <option value="">Seleccione un motivo...</option>
+                  <option *ngFor="let m of motivos" [value]="m">{{ m }}</option>
+                </select>
+                <i class="fas fa-chevron-down select-arrow"></i>
+              </div>
+              <div class="field-error" *ngIf="isError('motivoVisita')">
+                <span>Seleccione un motivo de visita</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Descripción -->
+          <div class="form-field full">
+            <label for="descripcion">
+              <i class="fas fa-align-left"></i> Descripción
+              <span class="optional">(Opcional)</span>
+            </label>
+            <div class="input-wrap textarea-wrap">
+              <textarea id="descripcion" formControlName="descripcion"
+                        placeholder="Información adicional sobre la visita..."
+                        rows="4" maxlength="1000"></textarea>
+              <span class="char-count">{{ charCount }}/1000</span>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-cancel" (click)="volver()">
+              <i class="fas fa-xmark"></i> Cancelar
+            </button>
+            <button type="submit" class="btn btn-submit" [disabled]="loading">
+              <ng-container *ngIf="!loading">
+                <i class="fas fa-floppy-disk"></i> Registrar Visita
+              </ng-container>
+              <ng-container *ngIf="loading">
+                <i class="fas fa-spinner fa-spin"></i> Guardando...
+              </ng-container>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

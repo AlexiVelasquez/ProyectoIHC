@@ -1,0 +1,104 @@
+/* ============================================
+   COLEGIO BUENAVENTURA - Global Styles
+   ============================================ */
+
+:root {
+  /* Brand Colors */
+  --primary:        #4B5EFC;
+  --primary-dark:   #2E3DD6;
+  --primary-light:  #7B8AFE;
+  --secondary:      #0F0F1A;
+  --accent:         #F5A623;
+  --accent-green:   #00C896;
+  --accent-red:     #FF4C6A;
+
+  /* Surfaces */
+  --bg:             #0F0F1A;
+  --bg-card:        #17172A;
+  --bg-elevated:    #1E1E35;
+  --bg-input:       #252540;
+  --border:         rgba(255, 255, 255, 0.08);
+  --border-active:  rgba(75, 94, 252, 0.6);
+
+  /* Text */
+  --text-primary:   #F0F0FF;
+  --text-secondary: #9090B8;
+  --text-muted:     #5A5A80;
+
+  /* Shadows */
+  --shadow-sm:  0 2px 8px rgba(0,0,0,0.4);
+  --shadow-md:  0 4px 24px rgba(0,0,0,0.5);
+  --shadow-lg:  0 12px 48px rgba(0,0,0,0.6);
+  --glow:       0 0 30px rgba(75, 94, 252, 0.25);
+
+  /* Radii */
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  20px;
+  --radius-xl:  28px;
+
+  /* Transitions */
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: 'DM Sans', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--bg-elevated);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* Selection */
+::selection {
+  background: var(--primary);
+  color: white;
+}
+
+/* Font Mono */
+.mono { font-family: 'Space Mono', monospace; }
+
+/* Utility animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1); opacity: 0.6; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}

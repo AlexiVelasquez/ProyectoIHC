@@ -1,0 +1,117 @@
+<div class="home">
+
+  <!-- ══ PANEL IZQUIERDO ══════════════════════════════════════════ -->
+  <aside class="panel-left">
+
+    <div class="school-brand">
+      <div class="brand-icon">
+        <i class="fas fa-graduation-cap"></i>
+      </div>
+      <div class="brand-text">
+        <span class="brand-upper">I.E.P.</span>
+        <span class="brand-main">Buenaventura</span>
+      </div>
+    </div>
+
+    <div class="welcome-block">
+      <div class="avatar-anim">
+        <div class="avatar-circle">
+          <i class="fas fa-user-circle"></i>
+        </div>
+        <div class="wave">👋</div>
+        <div class="ring ring-1"></div>
+        <div class="ring ring-2"></div>
+      </div>
+      <h1 class="welcome-title">¡Bienvenid(a)!</h1>
+      <p class="welcome-sub">Sistema de Control de Visitas</p>
+    </div>
+
+    <div class="clock-block">
+      <div class="clock-time mono">{{ hora }}</div>
+      <div class="clock-date">{{ fecha }}</div>
+    </div>
+
+    <div class="stat-badge">
+      <i class="fas fa-chart-line"></i>
+      <span><strong>{{ totalHoy }}</strong> visitas registradas hoy</span>
+    </div>
+
+    <div class="deco-grid">
+      <div *ngFor="let i of [0,1,2,3,4,5,6,7,8,9,10,11]" class="deco-dot"></div>
+    </div>
+
+  </aside>
+
+  <!-- ══ PANEL DERECHO ════════════════════════════════════════════ -->
+  <main class="panel-right">
+
+    <div class="right-inner">
+
+      <h2 class="panel-title">Control de Acceso</h2>
+      <p class="panel-sub">Escanee el QR desde su celular (misma red Wi-Fi)</p>
+
+      <!-- QR Card -->
+      <div class="qr-card">
+        <div class="qr-card-header">
+          <i class="fas fa-qrcode"></i>
+          <span>Código QR de Registro</span>
+          <div class="qr-live-dot"></div>
+        </div>
+
+        <div class="qr-wrapper">
+          <qrcode
+            [qrdata]="qrUrl"
+            [width]="200"
+            [margin]="2"
+            [errorCorrectionLevel]="'M'"
+            [colorDark]="'#0F0F1A'"
+            [colorLight]="'#F0F0FF'">
+          </qrcode>
+        </div>
+
+        <div class="qr-url-row">
+          <i class="fas fa-link"></i>
+          <code class="qr-url mono">{{ qrUrl }}</code>
+        </div>
+        <p class="qr-hint">Escanee con la cámara de su teléfono</p>
+      </div>
+
+      <div class="divider">
+        <span>o acceda directamente</span>
+      </div>
+
+      <!-- Buttons -->
+      <div class="action-grid">
+
+        <button class="action-btn primary" (click)="ir('/registro')">
+          <span class="btn-icon"><i class="fas fa-clipboard-plus"></i></span>
+          <span class="btn-content">
+            <span class="btn-label">Registrar Visita</span>
+            <span class="btn-desc">Ingresar nuevo visitante</span>
+          </span>
+          <i class="fas fa-chevron-right btn-arrow"></i>
+        </button>
+
+        <button class="action-btn secondary" (click)="ir('/historial')">
+          <span class="btn-icon"><i class="fas fa-table-list"></i></span>
+          <span class="btn-content">
+            <span class="btn-label">Ver Historial</span>
+            <span class="btn-desc">Todos los registros</span>
+          </span>
+          <i class="fas fa-chevron-right btn-arrow"></i>
+        </button>
+
+        <button class="action-btn outline" (click)="ir('/buscar')">
+          <span class="btn-icon"><i class="fas fa-search"></i></span>
+          <span class="btn-content">
+            <span class="btn-label">Buscar Visita</span>
+            <span class="btn-desc">Por DNI, nombre o apellido</span>
+          </span>
+          <i class="fas fa-chevron-right btn-arrow"></i>
+        </button>
+
+      </div>
+    </div>
+  </main>
+
+</div>

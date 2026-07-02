@@ -26,6 +26,12 @@ export const routes: Routes = [
     title: 'Buscar Visita'
   },
   {
+    path: 'dashboard',
+    loadComponent: () =>
+      import('./components/dashboard/dashboard.component').then(m => m.DashboardComponent),
+    title: 'Métricas en Vivo - Colegio Buenaventura'
+  },
+  {
     path: '**',
     redirectTo: ''
   }

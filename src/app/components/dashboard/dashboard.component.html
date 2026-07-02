@@ -1,0 +1,77 @@
+<div class="dashboard-layout">
+
+  <aside class="sidebar">
+    <div class="school-brand">
+      <div class="brand-icon">
+        <i class="fas fa-graduation-cap"></i>
+      </div>
+      <div class="brand-text">
+        <span class="brand-upper">I.E.P.</span>
+        <span class="brand-main">Buenaventura</span>
+      </div>
+    </div>
+
+    <div class="menu-header">
+      <i class="fas fa-chart-pie"></i>
+      <span>MÓDULO ANALÍTICO</span>
+    </div>
+
+    <div class="step active">
+      <span>📊</span> Vista General
+    </div>
+
+    <div class="info-box">
+      <i class="fas fa-circle-info"></i>
+      <span>Las métricas del gráfico se refrescan solas en intervalos de 3s de forma asíncrona.</span>
+    </div>
+
+    <button class="back-action-btn" (click)="volverAlInicio()">
+      <i class="fas fa-arrow-left"></i> Volver al Inicio
+    </button>
+  </aside>
+
+  <main class="main-content">
+    <header class="content-header">
+      <h2>Panel de Control y Analítica Funcional</h2>
+      <p>Análisis de flujos y control de accesos de visitantes</p>
+    </header>
+
+    <div class="metrics-grid">
+      <div class="metric-card border-blue">
+        <span class="card-label">Visitas del Día</span>
+        <h3 class="card-number">{{ visitasHoy }}</h3>
+        <span class="badge badge-blue">Sincronizado</span>
+      </div>
+
+      <div class="metric-card border-green">
+        <span class="card-label">Dentro del Establecimiento</span>
+        <h3 class="card-number text-green">{{ visitasActivas }}</h3>
+        <span class="badge badge-green">Tiempo Real</span>
+      </div>
+
+      <div class="metric-card border-purple">
+        <span class="card-label">Historial Acumulado</span>
+        <h3 class="card-number">{{ totalHistorico }}</h3>
+        <span class="badge badge-purple">Histórico</span>
+      </div>
+    </div>
+
+    <div class="chart-container-card">
+      <div class="chart-header">
+        <div class="chart-title">
+          <i class="fas fa-chart-line"></i>
+          <span>Monitoreo de Carga de Visitantes por Bloque Horario</span>
+        </div>
+        <div class="live-indicator">
+          <div class="live-dot"></div>
+          <span>TRANSMITIENDO DATOS</span>
+        </div>
+      </div>
+      
+      <div class="canvas-wrapper">
+        <canvas id="canvasVisitas"></canvas>
+      </div>
+    </div>
+  </main>
+
+</div>

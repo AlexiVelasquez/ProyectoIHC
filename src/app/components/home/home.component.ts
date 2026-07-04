@@ -1,24 +1,23 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { QRCodeModule } from 'angularx-qrcode'; 
+import { QRCodeModule } from 'angularx-qrcode';
 import { VisitasService } from '../../services/visitas.service';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, QRCodeModule], // ✅ aquí también
+  imports: [CommonModule, QRCodeModule],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit, OnDestroy {
-
-  qrUrl     = '';
-  hora      = '';
-  fecha     = '';
-  totalHoy  = 0;
+  qrUrl = '';
+  hora = '';
+  fecha = '';
+  totalHoy = 0;
   totalVisitas = 0;
-  databaseOnline = true;
+  serviceOnline = true;
 
   private timer: ReturnType<typeof setInterval> | null = null;
 
@@ -28,7 +27,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    // URL dinámica: funciona en localhost y en red local
     const { protocol, hostname, port } = window.location;
     this.qrUrl = `${protocol}//${hostname}${port ? ':' + port : ''}/registro?modo=visitante`;
 
@@ -42,16 +40,18 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.timer = setInterval(() => this.actualizarHora(), 1000);
 
     const hoy = new Date().toLocaleDateString('es-PE', {
-      day: '2-digit', month: '2-digit', year: 'numeric'
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric'
     });
 
     this.visitasService.getVisitas().subscribe({
       next: visitas => {
         this.totalVisitas = visitas.length;
         this.totalHoy = visitas.filter(v => v.fecha === hoy).length;
-        this.databaseOnline = true;
+        this.serviceOnline = true;
       },
-      error: () => this.databaseOnline = false
+      error: () => this.serviceOnline = false
     });
   }
 
@@ -65,12 +65,17 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   private actualizarHora(): void {
     const now = new Date();
-    this.hora  = now.toLocaleTimeString('es-PE', { 
-      hour: '2-digit', minute: '2-digit', second: '2-digit' 
+    this.hora = now.toLocaleTimeString('es-PE', {
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
     });
 
-    this.fecha = now.toLocaleDateString('es-PE', { 
-      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' 
+    this.fecha = now.toLocaleDateString('es-PE', {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
     });
   }
 }

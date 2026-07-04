@@ -1,6 +1,5 @@
 <div class="home">
 
-  <!-- ══ PANEL IZQUIERDO ══════════════════════════════════════════ -->
   <aside class="panel-left">
 
     <div class="school-brand">
@@ -36,9 +35,9 @@
       <span><strong>{{ totalHoy }}</strong> visitas registradas hoy</span>
     </div>
 
-    <div class="connection-badge" [class.offline]="!databaseOnline">
+    <div class="connection-badge" [class.offline]="!serviceOnline">
       <span class="connection-dot"></span>
-      {{ databaseOnline ? 'Base de datos conectada' : 'Base de datos sin conexión' }}
+      {{ serviceOnline ? 'Sistema en línea' : 'Servicio temporalmente inactivo' }}
     </div>
 
     <div class="deco-grid">
@@ -47,13 +46,12 @@
 
   </aside>
 
-  <!-- ══ PANEL DERECHO ════════════════════════════════════════════ -->
   <main class="panel-right">
 
     <div class="right-inner">
 
       <h2 class="panel-title">Control de Acceso</h2>
-      <p class="panel-sub">Escanee el QR desde su celular (misma red Wi-Fi)</p>
+      <p class="panel-sub">Escanee el QR desde cualquier celular</p>
 
       <div class="overview-grid">
         <div class="overview-card">
@@ -65,14 +63,13 @@
           <span><strong>{{ totalHoy }}</strong><small>Registradas hoy</small></span>
         </div>
         <div class="overview-card">
-          <span class="overview-icon" [class.green]="databaseOnline" [class.red]="!databaseOnline">
-            <i class="fas fa-database"></i>
+          <span class="overview-icon" [class.green]="serviceOnline" [class.red]="!serviceOnline">
+            <i class="fas fa-cloud"></i>
           </span>
-          <span><strong>{{ databaseOnline ? 'Activa' : 'Inactiva' }}</strong><small>Base de datos</small></span>
+          <span><strong>{{ serviceOnline ? 'Activo' : 'Inactivo' }}</strong><small>Sistema público</small></span>
         </div>
       </div>
 
-      <!-- QR Card -->
       <div class="qr-card">
         <div class="qr-card-header">
           <i class="fas fa-qrcode"></i>
@@ -102,7 +99,6 @@
         <span>o acceda directamente</span>
       </div>
 
-      <!-- Buttons -->
       <div class="action-grid">
 
         <button class="action-btn primary" (click)="ir('/registro')">

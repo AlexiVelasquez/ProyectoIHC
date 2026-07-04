@@ -22,6 +22,7 @@ export class HistorialVisitasComponent implements OnInit {
   sortAsc = false;
   loading = true;
   errorMsg = '';
+  visitaSeleccionada: Visita | null = null;
 
   motivosBase = [
     'Reunión de padres',
@@ -95,6 +96,14 @@ export class HistorialVisitasComponent implements OnInit {
     this.fechaFiltro = '';
     this.motivoFiltro = '';
     this.aplicarFiltros();
+  }
+
+  verDetalles(visita: Visita): void {
+    this.visitaSeleccionada = visita;
+  }
+
+  cerrarDetalles(): void {
+    this.visitaSeleccionada = null;
   }
 
   get motivosDisponibles(): string[] {

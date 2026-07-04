@@ -284,7 +284,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   table-layout: fixed;
-  min-width: 1080px;
+  min-width: 1210px;
 }
 
 thead tr {
@@ -325,10 +325,11 @@ th .fa-sort-down{ color: var(--primary-light); }
 
 th:nth-child(2) { width: 20%; }
 th:nth-child(3) { width: 17%; }
-th:nth-child(4) { width: 14%; }
-th:nth-child(5) { width: 24%; }
-th:nth-child(6) { width: 15%; }
-th:nth-child(7) { width: 11%; }
+th:nth-child(4) { width: 12%; }
+th:nth-child(5) { width: 22%; }
+th:nth-child(6) { width: 13%; }
+th:nth-child(7) { width: 10%; }
+.th-actions { width: 110px; text-align: center; }
 
 .table-row {
   border-bottom: 1px solid var(--border);
@@ -401,6 +402,172 @@ td {
 }
 .date-cell i { color: var(--accent); font-size: 0.7rem; }
 .time-cell i  { color: var(--primary-light); font-size: 0.7rem; }
+
+.details-btn {
+  min-width: 82px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.7rem;
+  border: 1px solid rgba(120, 136, 255, 0.28);
+  border-radius: 10px;
+  background: rgba(75,94,252,0.12);
+  color: var(--primary-light);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.details-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(75,94,252,0.28);
+}
+
+.details-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  background: rgba(7, 7, 15, 0.72);
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.18s ease;
+}
+
+.details-modal {
+  position: relative;
+  width: min(620px, 100%);
+  max-height: 92vh;
+  overflow: auto;
+  background:
+    radial-gradient(circle at top left, rgba(75,94,252,0.18), transparent 34%),
+    var(--bg-card);
+  border: 1px solid rgba(120, 136, 255, 0.24);
+  border-radius: 24px;
+  box-shadow: 0 28px 90px rgba(0,0,0,0.46);
+  padding: 1.4rem;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(255,255,255,0.04);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.modal-close:hover {
+  background: var(--accent-red);
+  color: white;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding-right: 2.2rem;
+  margin-bottom: 1.25rem;
+}
+
+.modal-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--primary), #7B4FFF);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  box-shadow: 0 14px 35px rgba(75,94,252,0.32);
+  flex-shrink: 0;
+}
+
+.modal-kicker {
+  color: var(--primary-light);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.modal-header h2 {
+  color: var(--text-primary);
+  font-size: 1.35rem;
+  margin: 0.2rem 0 0.1rem;
+}
+
+.modal-header p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.8rem;
+}
+
+.detail-item,
+.detail-description {
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: rgba(255,255,255,0.035);
+  padding: 0.9rem;
+}
+
+.detail-item.wide { grid-column: span 2; }
+
+.detail-item span,
+.detail-description span {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.45rem;
+}
+
+.detail-item span i,
+.detail-description span i {
+  color: var(--primary-light);
+}
+
+.detail-item strong {
+  display: block;
+  color: var(--text-primary);
+  font-size: 0.98rem;
+  overflow-wrap: anywhere;
+}
+
+.detail-description {
+  margin-top: 0.8rem;
+}
+
+.detail-description p {
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin: 0;
+}
 
 /* Empty state */
 .empty-state { padding: 3rem !important; }

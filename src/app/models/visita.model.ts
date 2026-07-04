@@ -3,6 +3,8 @@ export interface Visita {
   nombre: string;
   apellidos: string;
   dni: string;
+  telefono: string;
+  correo: string;
   motivoVisita: string;
   descripcion: string;
   fecha: string;

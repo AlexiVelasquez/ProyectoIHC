@@ -94,6 +94,10 @@
       </div>
 
       <!-- Resultados -->
+      <div class="search-error" *ngIf="errorMsg">
+        <i class="fas fa-triangle-exclamation"></i> {{ errorMsg }}
+      </div>
+
       <div class="results-card" *ngIf="buscado">
 
         <div class="results-header">

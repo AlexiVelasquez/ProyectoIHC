@@ -44,6 +44,12 @@
     </div>
   </div>
 
+  <div class="data-state error" *ngIf="errorMsg">
+    <i class="fas fa-triangle-exclamation"></i>
+    <span>{{ errorMsg }}</span>
+    <button (click)="cargar()">Reintentar</button>
+  </div>
+
   <!-- Table Container -->
   <div class="table-container">
 
@@ -132,7 +138,12 @@
           </tr>
 
           <!-- Empty state -->
-          <tr *ngIf="filtradas.length === 0">
+          <tr *ngIf="loading">
+            <td colspan="7" class="empty-state">
+              <div class="empty-inner"><i class="fas fa-spinner fa-spin"></i><p>Cargando visitas...</p></div>
+            </td>
+          </tr>
+          <tr *ngIf="!loading && !errorMsg && filtradas.length === 0">
             <td colspan="7" class="empty-state">
               <div class="empty-inner">
                 <i class="fas fa-inbox"></i>

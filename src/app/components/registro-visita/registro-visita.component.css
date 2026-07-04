@@ -78,6 +78,29 @@
   animation: fadeIn 0.4s ease;
 }
 
+.page.public-mode {
+  background:
+    radial-gradient(circle at 50% 0%, rgba(75,94,252,0.16), transparent 34rem),
+    var(--bg);
+}
+
+.public-mode .page-body {
+  align-items: center;
+  padding: 1.25rem;
+}
+
+.public-mode .card {
+  max-width: 760px;
+  border-radius: 22px;
+}
+
+.public-mode .card-form { padding: 2rem; }
+
+.public-mode .form-heading {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
 .page-header {
   display: flex;
   align-items: center;
@@ -138,7 +161,7 @@
 .card {
   display: flex;
   width: 100%;
-  max-width: 900px;
+  max-width: 1040px;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
@@ -149,7 +172,7 @@
 
 /* Sidebar */
 .card-sidebar {
-  width: 200px;
+  width: 230px;
   flex-shrink: 0;
   background: linear-gradient(180deg, #121230 0%, #0A0A18 100%);
   padding: 2rem 1.5rem;
@@ -231,7 +254,7 @@
 /* Form Area */
 .card-form {
   flex: 1;
-  padding: 2rem;
+  padding: 2rem 2.25rem;
   overflow-y: auto;
 }
 

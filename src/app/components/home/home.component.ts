@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   hora      = '';
   fecha     = '';
   totalHoy  = 0;
+  totalVisitas = 0;
+  databaseOnline = true;
 
   private timer: ReturnType<typeof setInterval> | null = null;
 
@@ -28,7 +30,13 @@ export class HomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // URL dinámica: funciona en localhost y en red local
     const { protocol, hostname, port } = window.location;
-    this.qrUrl = `${protocol}//${hostname}${port ? ':' + port : ''}/registro`;
+    this.qrUrl = `${protocol}//${hostname}${port ? ':' + port : ''}/registro?modo=visitante`;
+
+    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+      this.visitasService.getNetworkInfo().subscribe({
+        next: info => this.qrUrl = info.registrationUrl
+      });
+    }
 
     this.actualizarHora();
     this.timer = setInterval(() => this.actualizarHora(), 1000);
@@ -37,8 +45,14 @@ export class HomeComponent implements OnInit, OnDestroy {
       day: '2-digit', month: '2-digit', year: 'numeric'
     });
 
-    this.totalHoy = this.visitasService.getVisitas()
-      .filter(v => v.fecha === hoy).length;
+    this.visitasService.getVisitas().subscribe({
+      next: visitas => {
+        this.totalVisitas = visitas.length;
+        this.totalHoy = visitas.filter(v => v.fecha === hoy).length;
+        this.databaseOnline = true;
+      },
+      error: () => this.databaseOnline = false
+    });
   }
 
   ngOnDestroy(): void {

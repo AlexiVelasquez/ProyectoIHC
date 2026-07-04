@@ -36,6 +36,11 @@
       <span><strong>{{ totalHoy }}</strong> visitas registradas hoy</span>
     </div>
 
+    <div class="connection-badge" [class.offline]="!databaseOnline">
+      <span class="connection-dot"></span>
+      {{ databaseOnline ? 'Base de datos conectada' : 'Base de datos sin conexión' }}
+    </div>
+
     <div class="deco-grid">
       <div *ngFor="let i of [0,1,2,3,4,5,6,7,8,9,10,11]" class="deco-dot"></div>
     </div>
@@ -49,6 +54,23 @@
 
       <h2 class="panel-title">Control de Acceso</h2>
       <p class="panel-sub">Escanee el QR desde su celular (misma red Wi-Fi)</p>
+
+      <div class="overview-grid">
+        <div class="overview-card">
+          <span class="overview-icon blue"><i class="fas fa-users"></i></span>
+          <span><strong>{{ totalVisitas }}</strong><small>Total de visitas</small></span>
+        </div>
+        <div class="overview-card">
+          <span class="overview-icon green"><i class="fas fa-calendar-check"></i></span>
+          <span><strong>{{ totalHoy }}</strong><small>Registradas hoy</small></span>
+        </div>
+        <div class="overview-card">
+          <span class="overview-icon" [class.green]="databaseOnline" [class.red]="!databaseOnline">
+            <i class="fas fa-database"></i>
+          </span>
+          <span><strong>{{ databaseOnline ? 'Activa' : 'Inactiva' }}</strong><small>Base de datos</small></span>
+        </div>
+      </div>
 
       <!-- QR Card -->
       <div class="qr-card">
@@ -84,7 +106,7 @@
       <div class="action-grid">
 
         <button class="action-btn primary" (click)="ir('/registro')">
-          <span class="btn-icon"><i class="fas fa-clipboard-plus"></i></span>
+          <span class="btn-icon"><i class="fas fa-user-plus"></i></span>
           <span class="btn-content">
             <span class="btn-label">Registrar Visita</span>
             <span class="btn-desc">Ingresar nuevo visitante</span>
@@ -93,7 +115,7 @@
         </button>
 
         <button class="action-btn secondary" (click)="ir('/historial')">
-          <span class="btn-icon"><i class="fas fa-table-list"></i></span>
+          <span class="btn-icon"><i class="fas fa-clock-rotate-left"></i></span>
           <span class="btn-content">
             <span class="btn-label">Ver Historial</span>
             <span class="btn-desc">Todos los registros</span>
@@ -102,7 +124,7 @@
         </button>
 
         <button class="action-btn outline" (click)="ir('/buscar')">
-          <span class="btn-icon"><i class="fas fa-search"></i></span>
+          <span class="btn-icon"><i class="fas fa-magnifying-glass"></i></span>
           <span class="btn-content">
             <span class="btn-label">Buscar Visita</span>
             <span class="btn-desc">Por DNI, nombre o apellido</span>

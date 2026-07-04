@@ -206,6 +206,8 @@
 table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed;
+  min-width: 1080px;
 }
 
 thead tr {
@@ -230,13 +232,11 @@ th {
 th.sortable {
   cursor: pointer;
   user-select: none;
-  display: flex; /* Note: th needs display:table-cell, handled below */
+  display: table-cell;
 }
 
-th.sortable {
-  cursor: pointer;
-  user-select: none;
-}
+th.sortable span { vertical-align: middle; }
+th.sortable i { margin-left: 0.35rem; vertical-align: middle; }
 
 th.sortable:hover { color: var(--primary-light); }
 
@@ -245,6 +245,13 @@ th .fa-sort-up,
 th .fa-sort-down{ color: var(--primary-light); }
 
 .th-num { width: 48px; text-align: center; }
+
+th:nth-child(2) { width: 20%; }
+th:nth-child(3) { width: 17%; }
+th:nth-child(4) { width: 14%; }
+th:nth-child(5) { width: 24%; }
+th:nth-child(6) { width: 15%; }
+th:nth-child(7) { width: 11%; }
 
 .table-row {
   border-bottom: 1px solid var(--border);
@@ -330,3 +337,24 @@ td {
 .empty-inner i { font-size: 2.5rem; opacity: 0.3; }
 .empty-inner p { font-size: 0.875rem; font-weight: 600; color: var(--text-secondary); }
 .empty-inner span { font-size: 0.78rem; }
+.data-state {
+  margin: 1rem 2rem 0;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(255, 76, 106, 0.28);
+  border-radius: var(--radius-md);
+  background: rgba(255, 76, 106, 0.08);
+  color: #ff91a5;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.84rem;
+}
+.data-state span { flex: 1; }
+.data-state button {
+  border: 0;
+  border-radius: 8px;
+  padding: 0.45rem 0.75rem;
+  background: var(--accent-red);
+  color: white;
+  cursor: pointer;
+}

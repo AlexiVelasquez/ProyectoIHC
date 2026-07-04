@@ -55,6 +55,20 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 
+body {
+  background-image:
+    radial-gradient(circle at 10% 10%, rgba(75, 94, 252, 0.11), transparent 28rem),
+    radial-gradient(circle at 90% 90%, rgba(0, 200, 150, 0.06), transparent 26rem);
+}
+
+button, input, select, textarea { font: inherit; }
+button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid rgba(123, 138, 254, 0.42);
+  outline-offset: 2px;
+}
+
+button:disabled { cursor: not-allowed; }
+
 /* Scrollbar */
 ::-webkit-scrollbar { width: 5px; height: 5px; }
 ::-webkit-scrollbar-track { background: transparent; }

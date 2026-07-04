@@ -4,21 +4,25 @@
     <div class="success-check">
       <i class="fas fa-check"></i>
     </div>
-    <h2>¡Visita registrada!</h2>
-    <p>El visitante ha sido registrado exitosamente.</p>
-    <div class="progress-bar">
+    <h2>{{ modoVisitante ? '¡Gracias por registrarte!' : '¡Visita registrada!' }}</h2>
+    <p>
+      {{ modoVisitante
+        ? 'Gracias por llenar el formulario. Hasta la próxima.'
+        : 'El visitante ha sido registrado exitosamente.' }}
+    </p>
+    <div class="progress-bar" *ngIf="!modoVisitante">
       <div class="progress-fill"></div>
     </div>
-    <span class="redirect-hint">Redirigiendo al inicio...</span>
+    <span class="redirect-hint" *ngIf="!modoVisitante">Redirigiendo al inicio...</span>
   </div>
 </div>
 
 <!-- ══ PAGE ══════════════════════════════════════════════════════ -->
-<div class="page">
+<div class="page" [class.public-mode]="modoVisitante">
 
   <!-- Header -->
-  <header class="page-header">
-    <button class="back-btn" (click)="volver()" aria-label="Volver">
+  <header class="page-header" *ngIf="!modoVisitante">
+    <button class="back-btn" *ngIf="!modoVisitante" (click)="volver()" aria-label="Volver">
       <i class="fas fa-arrow-left"></i>
     </button>
     <div class="header-info">
@@ -35,7 +39,7 @@
     <div class="card">
 
       <!-- Sidebar -->
-      <aside class="card-sidebar">
+      <aside class="card-sidebar" *ngIf="!modoVisitante">
         <div class="visitor-avatar">
           <i class="fas fa-user"></i>
           <div class="avatar-pulse"></div>
@@ -104,7 +108,42 @@
             </div>
           </div>
 
-          <!-- Row 2: DNI + Motivo -->
+          <!-- Row 2: Contacto -->
+          <div class="form-row">
+            <div class="form-field" [class.has-error]="isError('telefono')" [class.is-valid]="isValid('telefono')">
+              <label for="telefono">
+                <i class="fas fa-phone"></i> Teléfono
+                <span class="optional">(Opcional)</span>
+              </label>
+              <div class="input-wrap">
+                <input id="telefono" type="tel" formControlName="telefono"
+                       placeholder="Ej: 987654321" maxlength="9" inputmode="numeric" autocomplete="tel">
+                <i class="fas fa-check status-icon valid-icon"></i>
+                <i class="fas fa-xmark status-icon error-icon"></i>
+              </div>
+              <div class="field-error" *ngIf="isError('telefono')">
+                <span>Ingrese un celular peruano válido de 9 dígitos</span>
+              </div>
+            </div>
+
+            <div class="form-field" [class.has-error]="isError('correo')" [class.is-valid]="isValid('correo')">
+              <label for="correo">
+                <i class="fas fa-envelope"></i> Correo electrónico
+                <span class="optional">(Opcional)</span>
+              </label>
+              <div class="input-wrap">
+                <input id="correo" type="email" formControlName="correo"
+                       placeholder="Ej: visitante@correo.com" autocomplete="email">
+                <i class="fas fa-check status-icon valid-icon"></i>
+                <i class="fas fa-xmark status-icon error-icon"></i>
+              </div>
+              <div class="field-error" *ngIf="isError('correo')">
+                <span>Ingrese un correo electrónico válido</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Row 3: DNI + Motivo -->
           <div class="form-row">
             <div class="form-field" [class.has-error]="isError('dni')" [class.is-valid]="isValid('dni')">
               <label for="dni">
@@ -157,7 +196,7 @@
 
           <!-- Actions -->
           <div class="form-actions">
-            <button type="button" class="btn btn-cancel" (click)="volver()">
+            <button *ngIf="!modoVisitante" type="button" class="btn btn-cancel" (click)="volver()">
               <i class="fas fa-xmark"></i> Cancelar
             </button>
             <button type="submit" class="btn btn-submit" [disabled]="loading">

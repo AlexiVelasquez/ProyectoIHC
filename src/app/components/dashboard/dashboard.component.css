@@ -1,0 +1,280 @@
+.dashboard-layout {
+  min-height: 100vh;
+  display: flex;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 82% 12%, rgba(75, 94, 252, 0.18), transparent 32%),
+    radial-gradient(circle at 12% 78%, rgba(0, 200, 150, 0.12), transparent 28%),
+    var(--bg);
+  font-family: 'DM Sans', sans-serif;
+}
+
+.sidebar {
+  width: 320px;
+  background: linear-gradient(180deg, rgba(20,20,42,0.96), rgba(10,10,24,0.98));
+  border-right: 1px solid var(--border);
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 24px 0 70px rgba(0,0,0,0.28);
+}
+
+.school-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-bottom: 2.5rem;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, var(--primary), #7B4FFF);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.brand-text { display: flex; flex-direction: column; }
+.brand-upper { font-size: 0.65rem; color: var(--text-muted); letter-spacing: 2px; font-weight: 700; }
+.brand-main { font-size: 1.05rem; color: var(--text-primary); font-weight: 800; }
+
+.menu-header {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.95rem 1rem;
+  border-radius: 14px;
+  color: var(--text-secondary);
+  background: rgba(75,94,252,0.12);
+  border: 1px solid rgba(123,138,254,0.2);
+  font-weight: 700;
+}
+
+.step i { color: var(--primary-light); }
+
+.info-box {
+  margin-top: auto;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  padding: 1rem;
+  border-radius: 16px;
+  display: flex;
+  gap: 0.75rem;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.info-box i { color: var(--primary-light); margin-top: 2px; }
+
+.back-action-btn {
+  margin-top: 1.25rem;
+  min-height: 44px;
+  width: 100%;
+  background: rgba(255,255,255,0.035);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: var(--text-primary);
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  transition: all var(--transition);
+}
+
+.back-action-btn:hover {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.main-content {
+  flex: 1;
+  padding: 2.4rem;
+  overflow-y: auto;
+}
+
+.content-header {
+  margin-bottom: 1.5rem;
+}
+
+.eyebrow {
+  display: inline-flex;
+  margin-bottom: 0.55rem;
+  color: var(--primary-light);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.content-header h2 {
+  font-size: clamp(1.6rem, 2.5vw, 2.3rem);
+  color: var(--text-primary);
+  font-weight: 900;
+  margin-bottom: 0.35rem;
+}
+
+.content-header p {
+  color: var(--text-muted);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.15rem;
+  margin-bottom: 1.4rem;
+}
+
+.metric-card {
+  position: relative;
+  overflow: hidden;
+  background: rgba(24,24,46,0.92);
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  padding: 1.35rem;
+  min-height: 150px;
+  box-shadow: 0 22px 55px rgba(0,0,0,0.22);
+}
+
+.metric-card::after {
+  content: '';
+  position: absolute;
+  right: -32px;
+  top: -36px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+}
+
+.border-blue { border-left: 4px solid var(--primary); }
+.border-green { border-left: 4px solid var(--accent-green); }
+.border-purple { border-left: 4px solid #7B4FFF; }
+
+.card-label {
+  color: var(--text-muted);
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.card-number {
+  color: var(--text-primary);
+  font-size: 2.6rem;
+  font-weight: 900;
+  line-height: 1;
+  margin: 0.55rem 0 0.75rem;
+}
+
+.text-green { color: var(--accent-green); }
+
+.badge {
+  display: inline-flex;
+  width: fit-content;
+  padding: 0.32rem 0.72rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.badge-blue { background: rgba(75,94,252,0.15); color: var(--primary-light); }
+.badge-green { background: rgba(0,200,150,0.15); color: var(--accent-green); }
+.badge-purple { background: rgba(123,79,255,0.15); color: #a895ff; }
+
+.chart-container-card {
+  background: rgba(24,24,46,0.92);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 1.35rem;
+  box-shadow: 0 22px 55px rgba(0,0,0,0.22);
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.chart-title {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--text-primary);
+  font-weight: 800;
+}
+
+.chart-title i { color: var(--primary-light); }
+
+.live-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--accent-green);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-green);
+  border-radius: 50%;
+  box-shadow: 0 0 14px var(--accent-green);
+  animation: pulse 1.4s infinite;
+}
+
+.canvas-wrapper {
+  position: relative;
+  height: 360px;
+  width: 100%;
+}
+
+.chart-footer {
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: 0.82rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.chart-footer i { color: var(--primary-light); }
+
+@keyframes pulse {
+  0% { transform: scale(0.9); opacity: 0.5; }
+  50% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.5; }
+}
+
+@media (max-width: 1024px) {
+  .dashboard-layout { flex-direction: column; overflow: visible; }
+  .sidebar { width: 100%; }
+  .metrics-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .main-content { padding: 1.25rem; }
+  .chart-header { align-items: flex-start; flex-direction: column; }
+  .canvas-wrapper { height: 300px; }
+}

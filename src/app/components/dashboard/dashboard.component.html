@@ -1,0 +1,84 @@
+<div class="dashboard-layout">
+
+  <aside class="sidebar">
+    <div class="school-brand">
+      <div class="brand-icon">
+        <i class="fas fa-graduation-cap"></i>
+      </div>
+      <div class="brand-text">
+        <span class="brand-upper">I.E.P.</span>
+        <span class="brand-main">Buenaventura</span>
+      </div>
+    </div>
+
+    <div class="menu-header">
+      <i class="fas fa-chart-pie"></i>
+      <span>Módulo Analítico</span>
+    </div>
+
+    <div class="step active">
+      <span><i class="fas fa-chart-simple"></i></span>
+      Vista general
+    </div>
+
+    <div class="info-box">
+      <i class="fas fa-circle-info"></i>
+      <span>Las métricas se actualizan cada 3 segundos usando los registros reales del sistema.</span>
+    </div>
+
+    <button class="back-action-btn" (click)="volverAlInicio()">
+      <i class="fas fa-arrow-left"></i> Volver al inicio
+    </button>
+  </aside>
+
+  <main class="main-content">
+    <header class="content-header">
+      <span class="eyebrow">Métricas en vivo</span>
+      <h2>Panel de control de visitantes</h2>
+      <p>Análisis del flujo de visitas y comportamiento por bloques horarios.</p>
+    </header>
+
+    <div class="metrics-grid">
+      <div class="metric-card border-blue">
+        <span class="card-label">Visitas del día</span>
+        <h3 class="card-number">{{ visitasHoy }}</h3>
+        <span class="badge badge-blue">Sincronizado</span>
+      </div>
+
+      <div class="metric-card border-green">
+        <span class="card-label">Actividad última hora</span>
+        <h3 class="card-number text-green">{{ visitasActivas }}</h3>
+        <span class="badge badge-green">Tiempo real</span>
+      </div>
+
+      <div class="metric-card border-purple">
+        <span class="card-label">Historial acumulado</span>
+        <h3 class="card-number">{{ totalHistorico }}</h3>
+        <span class="badge badge-purple">Histórico</span>
+      </div>
+    </div>
+
+    <div class="chart-container-card">
+      <div class="chart-header">
+        <div class="chart-title">
+          <i class="fas fa-chart-line"></i>
+          <span>Visitantes registrados por bloque horario</span>
+        </div>
+        <div class="live-indicator">
+          <div class="live-dot"></div>
+          <span>{{ loading ? 'CARGANDO' : 'EN VIVO' }}</span>
+        </div>
+      </div>
+
+      <div class="canvas-wrapper">
+        <canvas id="canvasVisitas"></canvas>
+      </div>
+
+      <div class="chart-footer">
+        <i class="fas fa-rotate"></i>
+        <span>Última actualización: {{ ultimaActualizacion || '—' }}</span>
+      </div>
+    </div>
+  </main>
+
+</div>

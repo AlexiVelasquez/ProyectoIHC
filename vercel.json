@@ -3,7 +3,7 @@
   "buildCommand": "npm run build",
   "outputDirectory": "dist/colegio-buenaventura/browser",
   "functions": {
-    "api/**/*.js": {
+    "api/*.js": {
       "includeFiles": "server/data/visitas.json"
     }
   },

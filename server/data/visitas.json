@@ -1,0 +1,98 @@
+[
+  {
+    "id": "8",
+    "nombre": "Pedro",
+    "apellidos": "Juan",
+    "dni": "76543211",
+    "telefono": "987654321",
+    "correo": "",
+    "motivoVisita": "Inspección o auditoría",
+    "descripcion": "",
+    "fecha": "18/06/2026",
+    "hora": "01:26"
+  },
+  {
+    "id": "7",
+    "nombre": "Pedro",
+    "apellidos": "Juan",
+    "dni": "76541234",
+    "telefono": "978603774",
+    "correo": "lexichato@gmail.com",
+    "motivoVisita": "Servicio técnico",
+    "descripcion": "Ayuda",
+    "fecha": "18/06/2026",
+    "hora": "01:10"
+  },
+  {
+    "id": "6",
+    "nombre": "Alexis Enders",
+    "apellidos": "Velasquez",
+    "dni": "75515388",
+    "telefono": "",
+    "correo": "",
+    "motivoVisita": "Trámite administrativo",
+    "descripcion": "tramite",
+    "fecha": "18/06/2026",
+    "hora": "00:49"
+  },
+  {
+    "id": "4",
+    "nombre": "Antonio Luis",
+    "apellidos": "Ruiz Martínez",
+    "dni": "74569378",
+    "telefono": "999444555",
+    "correo": "antonio.ruiz@example.com",
+    "motivoVisita": "Visita a estudiante",
+    "descripcion": "Visita a estudiante",
+    "fecha": "21/04/2025",
+    "hora": "10:45"
+  },
+  {
+    "id": "3",
+    "nombre": "María Luz",
+    "apellidos": "Pérez Rodríguez",
+    "dni": "73568902",
+    "telefono": "999333444",
+    "correo": "maria.perez@example.com",
+    "motivoVisita": "Entrega de documentos",
+    "descripcion": "Entrega de documentos",
+    "fecha": "21/04/2025",
+    "hora": "10:00"
+  },
+  {
+    "id": "2",
+    "nombre": "Roberto Aníbal",
+    "apellidos": "Peña Lozano",
+    "dni": "78493677",
+    "telefono": "999222333",
+    "correo": "roberto.pena@example.com",
+    "motivoVisita": "Trámite administrativo",
+    "descripcion": "Trámite administrativo",
+    "fecha": "21/04/2025",
+    "hora": "09:15"
+  },
+  {
+    "id": "1",
+    "nombre": "Ana Paula",
+    "apellidos": "Benavidez Rojas",
+    "dni": "76457893",
+    "telefono": "999111222",
+    "correo": "ana.benavidez@example.com",
+    "motivoVisita": "Reunión de padres",
+    "descripcion": "Reunión de padres",
+    "fecha": "21/04/2025",
+    "hora": "08:30"
+  },
+  {
+    "id": "5",
+    "nombre": "Ariana Amira",
+    "apellidos": "Navarro Castro",
+    "dni": "73490356",
+    "telefono": "999555666",
+    "correo": "ariana.navarro@example.com",
+    "motivoVisita": "Reunión con docente",
+    "descripcion": "Reunión con docente",
+    "fecha": "20/04/2025",
+    "hora": "11:00"
+  }
+]

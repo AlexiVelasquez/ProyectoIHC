@@ -1,30 +1,21 @@
 # Colegio Buenaventura — Control de Visitas
 
-Sistema Angular 17 con API Node.js y persistencia en MySQL.
+Sistema Angular 17 con API Node.js. No usa MySQL.
 
-## Requisitos
+## Cómo guarda los datos
 
-- Node.js 18 o superior
-- MySQL activo en el puerto configurado
-- Base de datos `colegio_buenaventura` con las tablas existentes del colegio
+- En local guarda los registros en `server/data/visitas.json`.
+- En Vercel guarda los registros en KV/Redis usando variables de entorno.
+- Si subes a Vercel sin KV, funcionará solo de prueba, pero los nuevos registros
+  podrían perderse cuando Vercel reinicie la función.
 
-## Configuración
+Los registros que estaban en MySQL fueron migrados como respaldo inicial a:
 
-La conexión se define en `.env`:
-
-```env
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=root
-DB_NAME=colegio_buenaventura
-API_PORT=3000
+```text
+server/data/visitas.json
 ```
 
-El puerto se verificó contra la instalación local de MySQL. Si lo cambias en el
-servidor, actualiza también `DB_PORT`.
-
-## Ejecución
+## Ejecución local
 
 Ejecuta un solo comando dentro de esta carpeta:
 
@@ -32,18 +23,78 @@ Ejecuta un solo comando dentro de esta carpeta:
 npm start
 ```
 
-Este comando inicia conjuntamente la API y Angular. La web estará disponible en
-`http://localhost:4200` y la API responde en `http://localhost:3000/api/health`.
-Angular también queda disponible en la red local y el QR usa automáticamente la
-IP Wi-Fi del equipo. El celular debe estar conectado a la misma red.
+La web estará disponible en:
 
-Para ejecutar cada parte por separado también están disponibles `npm run api`
-y `npm run web`.
+```text
+http://localhost:4200
+```
 
-Para abrir la web desde otros equipos de la misma red, usa `npm run start:network`.
+La API local responde en:
 
-## Datos
+```text
+http://localhost:3000/api/health
+```
 
-La API usa el modelo relacional existente: `visitantes`, `motivos_visita`,
-`usuarios` y `visitas`. Ofrece registro transaccional, historial y búsqueda por
-DNI, nombre o apellido.
+## Deploy público en Vercel
+
+En Vercel ya no se usa la IP `192.168...`. El QR usará automáticamente la URL
+pública del proyecto, por ejemplo:
+
+```text
+https://tu-proyecto.vercel.app/registro?modo=visitante
+```
+
+## Variables para Vercel
+
+Para que los registros no se pierdan, crea un KV/Redis en Vercel Marketplace o
+en Upstash y agrega estas variables en:
+
+`Vercel > Project Settings > Environment Variables`
+
+```env
+KV_REST_API_URL=...
+KV_REST_API_TOKEN=...
+```
+
+También se aceptan:
+
+```env
+UPSTASH_REDIS_REST_URL=...
+UPSTASH_REDIS_REST_TOKEN=...
+```
+
+## Build
+
+```bash
+npm run build
+```
+
+Vercel usará:
+
+- Build command: `npm run build`
+- Output directory: `dist/colegio-buenaventura/browser`
+- API serverless: carpeta `api/`
+
+## Probar después de publicar
+
+Abre:
+
+```text
+https://tu-proyecto.vercel.app/api/health
+```
+
+Debe responder algo similar a:
+
+```json
+{
+  "status": "ok",
+  "storage": "vercel-kv",
+  "total": 8
+}
+```
+
+Luego prueba el formulario público:
+
+```text
+https://tu-proyecto.vercel.app/registro?modo=visitante
+```
